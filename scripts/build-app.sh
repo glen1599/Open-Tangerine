@@ -4,7 +4,12 @@ set -euo pipefail
 cd "$(dirname "$0")/.."
 app="$PWD/dist/Open Tangerine.app"
 mkdir -p "$app/Contents/MacOS" "$PWD/.build/module-cache"
-find NativeApp/Sources -name '*.swift' -print0 | xargs -0 xcrun swiftc -swift-version 5 -O -parse-as-library -module-cache-path "$PWD/.build/module-cache" -o "$app/Contents/MacOS/OpenTangerine"
+# Pin the deployment target to the bundle's LSMinimumSystemVersion. Newer Swift
+# toolchains otherwise stamp the host SDK's next major (e.g. minos 28.0 on a
+# macOS 27 machine), and LaunchServices then refuses the bundle with
+# kLSNoExecutableErr (-10825) even though the raw binary runs.
+MACOS_TARGET="${MACOS_TARGET:-$(uname -m)-apple-macos26.0}"
+find NativeApp/Sources -name '*.swift' -print0 | xargs -0 xcrun swiftc -swift-version 5 -O -parse-as-library -target "$MACOS_TARGET" -module-cache-path "$PWD/.build/module-cache" -o "$app/Contents/MacOS/OpenTangerine"
 # Preserve the legacy bundle identifier so existing settings and login registration survive updates.
 cat > "$app/Contents/Info.plist" <<'PLIST'
 <?xml version="1.0" encoding="UTF-8"?>

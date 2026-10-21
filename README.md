@@ -5,6 +5,10 @@ Local processing, no account, no subscription. GPL-3.0-only. Safety limits apply
 
 **Mac status: 0.1.9 developer trial — ad-hoc signed, not Apple-notarized.** This is an independent project, not affiliated with Tangerine. It builds on [Satsuma](https://github.com/plyght/satsuma), with its MIT attribution preserved. It is not yet a complete replacement for Tangerine. See [limitations](#limitations).
 
+> **Unofficial fork.** This checkout tracks [sintaxerrorpvtltd/Open-Tangerine](https://github.com/sintaxerrorpvtltd/Open-Tangerine)
+> and stays GPL-3.0. The only change is a build fix for newer Swift toolchains —
+> see [FORK-NOTES.md](FORK-NOTES.md). The UI, assets and branding are upstream's.
+
 ## Windows and Linux desktop edition
 
 The new **0.2.0 early desktop trial** is a separate implementation with a smaller feature set. [Download status and installation](https://sintaxerrorpvtltd.github.io/Open-Tangerine/#desktop) · [Desktop source and guide](Desktop/README.md) · [Windows/Linux build checks](https://github.com/sintaxerrorpvtltd/Open-Tangerine/actions/workflows/desktop.yml).
